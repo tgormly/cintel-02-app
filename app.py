@@ -13,9 +13,11 @@ from shiny import *
 
 
 # TODO: Change the shinyswatch theme to morph, cosmo, darkly, flatly, sketchy (or other shinyswatch theme)
+# Completed with quartz selected
+
 # Preview at https://bootswatch.com/
 app_ui = ui.page_navbar(
-    shinyswatch.theme.minty(),
+    shinyswatch.theme.quartz(),
     ui.nav(
         "Home",
         ui.layout_sidebar(
@@ -35,15 +37,18 @@ app_ui = ui.page_navbar(
         ),
     ),
     # TODO: Update the links to reflect your own about, GitHub repo, and app
-    ui.nav(ui.a("About", href="https://github.com/denisecase")),
-    ui.nav(ui.a("GitHub", href="https://github.com/denisecase/cintel-02-app")),
-    ui.nav(ui.a("App", href="https://denisecase.github.io/cintel-02-app/")),
+    # App link updated, but
+    # TODO: needs to be taken care of in Github
+    ui.nav(ui.a("About", href="https://github.com/tgormly")),
+    ui.nav(ui.a("GitHub", href="https://github.com/tgormly/cintel-02-app")),
+    ui.nav(ui.a("App", href="https://tgormly.github.io/cintel-02-app/")),
     ui.nav(ui.a("Shiny", href="https://shiny.posit.co/py/")),
     ui.nav(ui.a("Examples", href="https://shinylive.io/py/examples/")),
     ui.nav(ui.a("Themes", href="https://rstudio.github.io/py-shinyswatch/")),
     ui.nav(ui.a("Deploy", href="https://docs.posit.co/shinyapps.io/getting-started.html#working-with-shiny-for-python")),
     # TODO: Update the title to reflect yourname Dashboard
-    title=ui.h1("Case Dashboard"),
+    # Completed
+    title=ui.h1("Tim Gormly Dashboard"),
 )
 
 
@@ -62,8 +67,13 @@ def server(input, output, session):
     @render.text
     def welcome_output():
         user = input.name_input();
-        welcome_string = f'Greetings {user}!';
-        return welcome_string
+        if len(user) > 0:
+            welcome_string = f'{user}! Hello, and welcome to my app!';
+            return welcome_string
+        else:
+            welcome_string = f'Hello!  Please enter your name in the box on the left.';
+            return welcome_string
+
 
     @output
     @render.text
