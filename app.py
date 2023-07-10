@@ -62,6 +62,7 @@ def server(input, output, session):
 
     # Define the reactive outputs. Tell what to render and how to render it
     # TODO: Customize the reactive greeting.
+    # Completed
 
     @output
     @render.text
@@ -80,8 +81,12 @@ def server(input, output, session):
     def insights_output():
         answer = input.language_input()
         count = len(answer)
-        language_string = f'You like {answer}. That takes {count} characters'
-        return language_string
+        if answer == '':
+            message = 'Tell us your favorite programming language(s) in the textbox on the left'
+            return message
+        else:
+            language_string = f'You like {answer}. That takes {count} characters'
+            return language_string
 
 # Create a Shiny App by passing in the two parts defined above.
 app = App(app_ui, server, debug=True)
